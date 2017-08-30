@@ -1,1 +1,23 @@
-<h1>{{test}} is the fig name</h1>
+<!-- contact -->
+				<h4 class="text-center ieee-white">You are joining the <strong>{{figname}}</strong> FIG channel</h4>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="cform" id="contact-form">
+                            <div id="errormessage"></div>
+							<form action="/adduser" method="post" role="form" class="contactForm">
+							  <div class="form-group">
+								<label for="email">Your Email</label>
+								<input type="email" class="form-control" name="email" id="email" placeholder="Whatever email you actually check" data-rule="email" data-msg="Please enter a valid email" />
+								<input type="hidden" name="fig" value="{{figname}}">
+                                <input type="hidden" name="chan" value="{{chan}}">
+                                <div class="validation"></div>
+							  </div>
+							  
+							  <button type="submit" class="btn btn-theme pull-left">Submit</button>
+							</form>
+
+						</div>
+					</div>
+					<!-- ./span12 -->
+				</div>
+				
