@@ -36,8 +36,20 @@ app.post('/adduser', function(req, res, next) {
     if (req.body.fig) {
         console.log('fig name: ' + req.body.fig);
         console.log('channelId: ' + req.body.chan);
+
+        let inviteUrl = 'https://slack.com/api/users.admin.invite?token=' + slacktoken + '&email=' + req.body.email + '&channels=' + req.body.chan;
+
+        request(inviteUrl, function(err, res, body) {
+            console.log(body);
+        });
     } else {
         console.log('User joined from main page');
+
+        let inviteUrl = 'https://slack.com/api/users.admin.invite?token=' + slacktoken + '&email=' + req.body.email;
+        
+        request(inviteUrl, function(err, res, body) {
+            console.log(body);
+        });
     }
     //get all info on the new user and add them to the channel
     res.redirect('/submitted');
@@ -104,8 +116,8 @@ app.get('/:figname', function(req, exRes) {
                         let bodyChanJson = JSON.parse(bodyChanCreated);
                         let channelId = 'test';
                         console.log(bodyChanCreated);
-                        //console.log(bodyChanJson.channel.id);
-                        //channelId = bodyChanJson.channel.id;
+                        console.log(bodyChanJson.channel.id);
+                        channelId = bodyChanJson.channel.id;
     
                         console.log('channel created, rendering');
                         exRes.render('figsignup', {figname: figName, chan: channelId}, function(err, html) {
@@ -118,7 +130,8 @@ app.get('/:figname', function(req, exRes) {
                     });
                 } else {
                     console.log('channel exists, rendering page');
-                    exRes.render('figsignup', {figname: figName}, function(err, html) {
+
+                    exRes.render('figsignup', {figname: figName, chan: channelId}, function(err, html) {
                         if (err) {
                             console.log(err);
                         }
