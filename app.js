@@ -15,7 +15,8 @@ const figNames = [
     'integrated-circuits',
     'designers',
     'short-circuits',
-    'achievers'
+    'achievers',
+    'uab'
 ];
 
 const slacktoken = 'secret';
